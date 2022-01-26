@@ -1,0 +1,8 @@
+kubernetes
+kopf[dev]
+jinja2
+dotmap
+kubernetes
+gpsdclient
+tornado
+pyvisa
