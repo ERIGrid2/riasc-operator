@@ -1,0 +1,26 @@
+---
+apiVersion: device.riasc.eu/v1
+kind: Chroma4Q
+metadata:
+  name: rwth-chroma
+  namespace: sim-hes-off
+spec:
+  connection:
+    host: chroma.acs-lab.eonerc.rwth-aachen.de
+    port: 2101
+    timeout: 20
+
+  state: disconnected
+  phases: [1, 2]
+
+  parameters:
+    maxCurrent: 16.0 # A
+    overcurrentDelay: 0.0 # s
+    maxPower: 3500 # VA
+    maxFrequency: 55.0 # Hz
+    maxVolageAC: 235.0 # V
+
+  setpoints:
+    voltageDC:  [  0.0,   0.0]
+    voltageRMS: [230.0, 240.0]
+    frequency:  [ 50.0,  51.0]
