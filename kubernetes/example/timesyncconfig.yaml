@@ -1,0 +1,42 @@
+---
+apiVersion: riasc.eu/v1
+kind: TimeSyncConfig
+metadata:
+  name: aurelius
+spec:
+  nodeSelector:
+      kubernetes.io/hostname: rpi-aurelius-4
+
+  ntp:
+    server:
+      enabled: true
+
+      local: true
+      stratum: 1
+
+      allow:
+      - 172.23.157.0/24
+
+  gps:
+    enabled: true
+
+    device: ttyAMA0
+
+  pps:
+    enabled: true
+
+    device: pps0
+    pin: 18
+
+---
+apiVersion: riasc.eu/v1
+kind: TimeSyncConfig
+metadata:
+  name: aurelius-slaves
+spec:
+  nodeSelector:
+    time-sync.riasc.eu/group: aurelius-slaves
+
+  ntp:
+    servers:
+    - address: 172.23.157.179 # rpi-aurelius-4

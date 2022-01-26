@@ -1,0 +1,31 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: time-sync
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: node-patcher
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - nodes
+  - nodes/status
+  verbs:
+  - patch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: time-sync-node-patcher
+subjects:
+- kind: ServiceAccount
+  namespace: riasc-system
+  name: time-sync
+roleRef:
+  kind: ClusterRole
+  name: node-patcher
+  apiGroup: rbac.authorization.k8s.io

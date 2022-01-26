@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: riasc-operator
+  namespace: riasc-system
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      application: operator
+  template:
+    metadata:
+      labels:
+        application: operator
+    spec:
+      serviceAccountName: riasc-account
+      containers:
+      - name: operator
+        image: erigrid/riasc-operator
+        resources:
+          limits:
+            cpu: 250m
+            memory: 250M
+        env:
+        - name: ENV
+          value: production
+        - name: ADMISSION_ADDR
+          value: https://{{ include "riasc.fullname" . }}-webhook.{{  .Release.Namespace }}.svc
+        - name: ADMISSION_CERTFILE
+          value: /cert/tls.crt
+        - name: ADMISSION_PKEYFILE
+          value: /cetc/tls.key
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace

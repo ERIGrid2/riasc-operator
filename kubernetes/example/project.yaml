@@ -1,0 +1,11 @@
+---
+apiVersion: riasc.eu/v1
+kind: Project
+metadata:
+  name: sim-hes-off
+spec:
+  users:
+  - stv0g
+
+  nodes:
+  - minikube
