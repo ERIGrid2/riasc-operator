@@ -1,5 +1,5 @@
 ---
-apiGroup: riasc.eu/v1
+apiVersion: riasc.eu/v1
 kind: SchedulerConfig
 metadata:
   name: test
